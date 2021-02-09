@@ -1,6 +1,7 @@
 const validator = require('validator');
 const yargs = require('yargs');
 const chalk = require('chalk');
+const encodeUrl = require('encodeurl');
 const { shortURL, readSavedLinks, deleteLink} = require('./utils');
 
 // commands
@@ -23,7 +24,7 @@ yargs.command({
     },
     handler: async (argv) =>{
         
-        const url = argv.url.trim().toLowerCase();
+        const url = encodeUrl(argv.url.trim().toLowerCase());
         if(!validator.isURL(url)){
             return console.log(chalk.bgRed.bold('This url is not in correct format'.toUpperCase()));
         }
